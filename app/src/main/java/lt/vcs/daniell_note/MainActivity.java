@@ -2,6 +2,7 @@ package lt.vcs.daniell_note;
 
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -24,21 +25,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        UseCaseRepository useCaseRepository = new UseCaseRepository();
-
-        List<Note> notes = useCaseRepository.generateNoteList(15);
-
-//        notes.add(new Note(1,"Name1", "Content1"));
-//        notes.add(new Note(2,"Name2", "Content2"));
-//        notes.add(new Note(3,"Name3", "Content3"));
-//        notes.add(new Note(4,"Name4", "Content4"));
-//        notes.add(new Note(5,"Name5", "Content5"));
-
-        ArrayAdapter<Note> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
-
         ListView listView = findViewById(R.id.listView);
 
-        listView.setAdapter(arrayAdapter);
+        UseCaseRepository useCaseRepository = new UseCaseRepository();
+
+        setUpListView(useCaseRepository, listView);
 
         AdapterView.OnItemClickListener listner = new AdapterView.OnItemClickListener() {
             @Override
@@ -47,5 +38,12 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         listView.setOnItemClickListener(listner);
+    }
+    @NonNull
+    private void setUpListView(UseCaseRepository useCaseRepository, ListView listView) {
+        List<Note> notes = useCaseRepository.generateNoteList(15);
+
+        ArrayAdapter<Note> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
+        listView.setAdapter(arrayAdapter);
     }
 }
