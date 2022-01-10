@@ -1,6 +1,7 @@
 package lt.vcs.daniell_note;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Note {
     private int id;
@@ -8,6 +9,7 @@ public class Note {
     private String content;
     private LocalDateTime creationDate;
     private LocalDateTime updateDate;
+    final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public Note(int id, String name, String content) {
         this.id = id;
@@ -50,9 +52,10 @@ public class Note {
     }
     @Override
     public String toString() {
-        return "id= " + id + name + '\'' +
-                ", content='" + content + '\'' +
-                ", creationDate=" + creationDate +
-                ", updateDate=" + updateDate;
+        return "id+ " + id +
+                " / " + name +
+                " / " + content +
+                " / " + creationDate.format(formatter) +
+                " / " + updateDate.format(formatter);
     }
 }

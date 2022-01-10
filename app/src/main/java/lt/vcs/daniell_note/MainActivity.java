@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "app test";
@@ -26,11 +27,21 @@ public class MainActivity extends AppCompatActivity {
 
         List<Note> notes = new ArrayList<>();
 
-        notes.add(new Note(1,"Name1", "Content1"));
-        notes.add(new Note(2,"Name2", "Content2"));
-        notes.add(new Note(3,"Name3", "Content3"));
-        notes.add(new Note(4,"Name4", "Content4"));
-        notes.add(new Note(5,"Name5", "Content5"));
+        Random random = new Random();
+        Note note;
+
+        int id = 1;
+        while(id <= 10){
+            note = new Note(id, "Name" + id, "Content" + 1 + " - " + random.nextInt(1000000));
+            notes.add(note);
+            id++;
+        }
+
+//        notes.add(new Note(1,"Name1", "Content1"));
+//        notes.add(new Note(2,"Name2", "Content2"));
+//        notes.add(new Note(3,"Name3", "Content3"));
+//        notes.add(new Note(4,"Name4", "Content4"));
+//        notes.add(new Note(5,"Name5", "Content5"));
 
         ArrayAdapter<Note> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
 
