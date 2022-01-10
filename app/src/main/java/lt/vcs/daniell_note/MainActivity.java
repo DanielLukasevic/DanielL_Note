@@ -19,10 +19,13 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "app test";
+    private List<Note> notes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         ListView listView = findViewById(R.id.listView);
@@ -31,17 +34,20 @@ public class MainActivity extends AppCompatActivity {
 
         setUpListView(useCaseRepository, listView);
 
-        AdapterView.OnItemClickListener listner = new AdapterView.OnItemClickListener() {
+        onClickItem(listView);
+    }
+    private void onClickItem(ListView listView){
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Log.i(TAG, "onItemClick: " + position);
+                Log.i(TAG, "onItemClick: " + notes.get(position));
             }
-        };
-        listView.setOnItemClickListener(listner);
+        });
+
     }
     @NonNull
     private void setUpListView(UseCaseRepository useCaseRepository, ListView listView) {
-        List<Note> notes = useCaseRepository.generateNoteList(15);
+        notes = useCaseRepository.generateNoteList(15);
 
         ArrayAdapter<Note> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
         listView.setAdapter(arrayAdapter);
