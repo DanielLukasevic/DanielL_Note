@@ -52,7 +52,7 @@ public class Note {
     }
     @Override
     public String toString() {
-        return "id+ " + id +
+        return "id = " + id +
                 " / " + name +
                 " / " + content +
                 " / " + creationDate.format(formatter) +

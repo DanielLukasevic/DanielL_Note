@@ -24,18 +24,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        UseCaseRepository useCaseRepository = new UseCaseRepository();
 
-        List<Note> notes = new ArrayList<>();
-
-        Random random = new Random();
-        Note note;
-
-        int id = 1;
-        while(id <= 10){
-            note = new Note(id, "Name" + id, "Content" + 1 + " - " + random.nextInt(1000000));
-            notes.add(note);
-            id++;
-        }
+        List<Note> notes = useCaseRepository.generateNoteList(15);
 
 //        notes.add(new Note(1,"Name1", "Content1"));
 //        notes.add(new Note(2,"Name2", "Content2"));
