@@ -20,6 +20,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "app test";
     private List<Note> notes;
+    private ArrayAdapter<Note> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i(TAG, "onItemLongClick: " + notes.get(position).getId());
+                notes.remove(position);
+                arrayAdapter.notifyDataSetChanged();
                 return true;
             }
         });
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private void setUpListView(UseCaseRepository useCaseRepository, ListView listView) {
         notes = useCaseRepository.generateNoteList(15);
 
-        ArrayAdapter<Note> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
         listView.setAdapter(arrayAdapter);
     }
 }
