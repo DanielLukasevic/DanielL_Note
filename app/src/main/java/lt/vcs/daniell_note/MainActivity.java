@@ -36,28 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         onClickItem(listView);
 
-        onLomgClickItem(listView);
-    }
-
-    private void onLomgClickItem(ListView listView) {
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//                notes.remove(position);
-//                arrayAdapter.notifyDataSetChanged();
-                showDialog();
-                return true;
-            }
-        });
-    }
-
-    private void onClickItem(ListView listView){
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i(TAG, "onItemClick: " + notes.get(position));
-            }
-        });
+        onLongClickItem(listView);
     }
 
     @NonNull
@@ -68,7 +47,28 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
     }
 
-    private void showDialog(){
+    private void onClickItem(ListView listView){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i(TAG, "onItemClick: " + notes.get(position));
+            }
+        });
+    }
+
+    private void onLongClickItem(ListView listView) {
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                notes.remove(position);
+//                arrayAdapter.notifyDataSetChanged();
+                showAlertDialog();
+                return true;
+            }
+        });
+    }
+
+    private void showAlertDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you would like to remove?");
         builder.setPositiveButton("Yes", null);
