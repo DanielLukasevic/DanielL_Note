@@ -23,9 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
         ListView listView = findViewById(R.id.listView);
@@ -35,16 +33,29 @@ public class MainActivity extends AppCompatActivity {
         setUpListView(useCaseRepository, listView);
 
         onClickItem(listView);
+
+        onLomgClickItem(listView);
     }
+
+    private void onLomgClickItem(ListView listView) {
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.i(TAG, "onItemLongClick: " + notes.get(position).getId());
+                return true;
+            }
+        });
+    }
+
     private void onClickItem(ListView listView){
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i(TAG, "onItemClick: " + notes.get(position));
             }
         });
-
     }
+
     @NonNull
     private void setUpListView(UseCaseRepository useCaseRepository, ListView listView) {
         notes = useCaseRepository.generateNoteList(15);
