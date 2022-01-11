@@ -3,6 +3,7 @@ package lt.vcs.daniell_note;
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -42,8 +43,9 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                notes.remove(position);
-                arrayAdapter.notifyDataSetChanged();
+//                notes.remove(position);
+//                arrayAdapter.notifyDataSetChanged();
+                showDialog();
                 return true;
             }
         });
@@ -64,5 +66,13 @@ public class MainActivity extends AppCompatActivity {
 
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
         listView.setAdapter(arrayAdapter);
+    }
+
+    private void showDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you would like to remove?");
+        builder.setPositiveButton("Yes", null);
+        builder.setNegativeButton("No", null);
+        builder.show();
     }
 }
