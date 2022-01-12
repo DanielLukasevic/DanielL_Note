@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
 //                Log.i(TAG, "onItemClick: " + notes.get(position));
 
                 Intent intent = new Intent(MainActivity.this, NoteDetails.class);
+                intent.putExtra("lt.vcs.daniell.main_activity_one", notes.get(position).getName());
+                intent.putExtra("lt.vcs.daniell.main_activity_two", notes.get(position).toString());
                 startActivity(intent);
             }
         });
