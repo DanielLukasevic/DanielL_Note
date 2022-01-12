@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -62,17 +63,23 @@ public class MainActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 //                notes.remove(position);
 //                arrayAdapter.notifyDataSetChanged();
-                showAlertDialog();
+                showAlertDialog(position);
                 return true;
             }
         });
     }
 
-    private void showAlertDialog(){
+    private void showAlertDialog(int position){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you would like to remove?");
         builder.setPositiveButton("Yes", null);
-        builder.setNegativeButton("No", null);
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+                    public void onClick(DialogInterface dialog, int which){
+                notes.remove(position);
+                arrayAdapter.notifyDataSetChanged();
+            }
+        });
         builder.show();
     }
 }
