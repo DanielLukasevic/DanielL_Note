@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DanielL_Note</string>
+    <string name="some_text">Name is missing</string>
 </resources>
