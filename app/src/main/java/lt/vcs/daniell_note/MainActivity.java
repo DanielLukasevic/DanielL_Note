@@ -15,6 +15,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "app test";
     private List<Note> notes;
     private ArrayAdapter<Note> arrayAdapter;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ListView listView = findViewById(R.id.listView);
+         fab = findViewById(R.id.fab);
 
         UseCaseRepository useCaseRepository = new UseCaseRepository();
 
@@ -38,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
         onClickItem(listView);
 
         onLongClickItem(listView);
+
+        setUpFab();
     }
+
+
 
     @NonNull
     private void setUpListView(UseCaseRepository useCaseRepository, ListView listView) {
@@ -65,6 +74,15 @@ public class MainActivity extends AppCompatActivity {
 //                arrayAdapter.notifyDataSetChanged();
                 showAlertDialog(position);
                 return true;
+            }
+        });
+    }
+
+    private void setUpFab() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "onClick: fab");
             }
         });
     }
