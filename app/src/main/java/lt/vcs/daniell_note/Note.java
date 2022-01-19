@@ -1,5 +1,7 @@
 package lt.vcs.daniell_note;
 
+import static lt.vcs.daniell_note.Constants.DATABASE_TABLE_NOTES;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -8,7 +10,7 @@ import androidx.room.PrimaryKey;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Entity(tableName = "notes")
+@Entity(tableName = DATABASE_TABLE_NOTES)
 public class Note {
     @PrimaryKey
     private int id;

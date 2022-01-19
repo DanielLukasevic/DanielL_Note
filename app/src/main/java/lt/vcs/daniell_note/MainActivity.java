@@ -2,6 +2,8 @@ package lt.vcs.daniell_note;
 
 
 
+import static lt.vcs.daniell_note.Constants.DATABASE_NAME;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 Room.databaseBuilder(
                         getApplicationContext(),
                         MainDatabase.class,
-                        "main"
+                        DATABASE_NAME
                 )
                         .allowMainThreadQueries()
                         .fallbackToDestructiveMigration()

@@ -1,11 +1,13 @@
 package lt.vcs.daniell_note;
 
+import static lt.vcs.daniell_note.Constants.DATABASE_VERSION;
+
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
 @Database(
         entities = {Note.class},
-        version = 1,
+        version = DATABASE_VERSION,
         exportSchema = false
 )
 

@@ -2,6 +2,8 @@ package lt.vcs.daniell_note;
 
 
 
+import static lt.vcs.daniell_note.Constants.APP_TEST;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,7 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class NoteDetails extends AppCompatActivity {
-    private static final String TAG = "app test";
+    private static final String APP_TEST  = "app test";
 
 
     @Override
@@ -20,7 +22,7 @@ public class NoteDetails extends AppCompatActivity {
         Intent intent = getIntent();
         String messageOne = intent.getStringExtra("lt.vcs.daniell.main_activity_one");
         String messageTwo = intent.getStringExtra("lt.vcs.daniell.main_activity_two");
-        Log.i(TAG, "onCreate: " + messageOne);
-        Log.i(TAG, "onCreate: " + messageTwo);
+        Log.i(APP_TEST , "onCreate: " + messageOne);
+        Log.i(APP_TEST , "onCreate: " + messageTwo);
     }
 }
