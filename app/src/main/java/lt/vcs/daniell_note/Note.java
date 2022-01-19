@@ -1,14 +1,33 @@
 package lt.vcs.daniell_note;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@Entity(tableName = "notes")
 public class Note {
+    @PrimaryKey
     private int id;
+
+    @ColumnInfo(name = "note_name")
     private String name;
+
+    @ColumnInfo (name = "note_content")
     private String content;
+
+    @Ignore
+    @ColumnInfo (name = "note_create_date")
     private LocalDateTime creationDate;
+
+    @Ignore
+    @ColumnInfo (name = "note_update_date")
     private LocalDateTime updateDate;
+
+    @Ignore
     final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public Note(int id, String name, String content) {

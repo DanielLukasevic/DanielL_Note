@@ -5,6 +5,7 @@ package lt.vcs.daniell_note;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_main);
 
         ListView listView = findViewById(R.id.listView);
          fab = findViewById(R.id.fab);
@@ -41,6 +42,23 @@ public class MainActivity extends AppCompatActivity {
         UseCaseRepository useCaseRepository = new UseCaseRepository();
 
         setUpListView(useCaseRepository, listView);
+
+         MainDatabase database =
+                Room.databaseBuilder(
+                        getApplicationContext(),
+                        MainDatabase.class,
+                        "main"
+                )
+                        .allowMainThreadQueries()
+                        .fallbackToDestructiveMigration()
+                        .build();
+
+        NoteDao noteDao = database.noteDao();
+
+        //noteDao.getAll()
+        noteDao.insertNotes(notes);
+
+
 
         onClickItem(listView);
 
@@ -77,8 +95,8 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//                notes.remove(position);
-//                arrayAdapter.notifyDataSetChanged();
+               notes.remove(position);
+               arrayAdapter.notifyDataSetChanged();
                 showAlertDialog(position);
                 return true;
             }
