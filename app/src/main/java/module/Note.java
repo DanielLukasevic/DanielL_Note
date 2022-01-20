@@ -1,4 +1,4 @@
-package lt.vcs.daniell_note;
+package module;
 
 import static lt.vcs.daniell_note.Constants.DATABASE_TABLE_NOTES;
 
@@ -15,17 +15,18 @@ public class Note {
     @PrimaryKey
     private int id;
 
+
     @ColumnInfo(name = "note_name")
     private String name;
 
     @ColumnInfo (name = "note_content")
     private String content;
 
-    @Ignore
-    @ColumnInfo (name = "note_create_date")
+
+    @ColumnInfo (name = "note_creation_date")
     private LocalDateTime creationDate;
 
-    @Ignore
+
     @ColumnInfo (name = "note_update_date")
     private LocalDateTime updateDate;
 
@@ -60,8 +61,16 @@ public class Note {
         this.content = content;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public LocalDateTime getCreationDate() {
         return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 
     public LocalDateTime getUpdateDate() {

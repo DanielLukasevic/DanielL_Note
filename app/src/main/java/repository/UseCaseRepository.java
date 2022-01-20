@@ -1,10 +1,12 @@
-package lt.vcs.daniell_note;
+package repository;
 
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import module.Note;
 
 public class UseCaseRepository {
     @NonNull

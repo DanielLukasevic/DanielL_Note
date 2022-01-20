@@ -2,6 +2,7 @@ package lt.vcs.daniell_note;
 
 
 
+import static lt.vcs.daniell_note.Constants.APP_TEST;
 import static lt.vcs.daniell_note.Constants.DATABASE_NAME;
 
 import androidx.annotation.NonNull;
@@ -17,18 +18,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import module.Note;
+import repository.MainDatabase;
+import repository.NoteDao;
+import repository.UseCaseRepository;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "app test";
+
     private List<Note> notes;
     private ArrayAdapter<Note> arrayAdapter;
     private FloatingActionButton fab;
@@ -41,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.listView);
          fab = findViewById(R.id.fab);
 
-        UseCaseRepository useCaseRepository = new UseCaseRepository();
+       UseCaseRepository useCaseRepository = new UseCaseRepository();
 
-        setUpListView(useCaseRepository, listView);
+
 
          MainDatabase database =
                 Room.databaseBuilder(
@@ -57,10 +60,13 @@ public class MainActivity extends AppCompatActivity {
 
         NoteDao noteDao = database.noteDao();
 
-        //noteDao.getAll()
-        noteDao.insertNotes(notes);
+        notes = noteDao.getAll();
+        Log.i(APP_TEST,"onCreate: " + noteDao.getAll());
+        Log.i(APP_TEST, "onCreate: " + noteDao.getItem(5));
 
 
+
+        setUpListView( listView);
 
         onClickItem(listView);
 
@@ -72,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     @NonNull
-    private void setUpListView(UseCaseRepository useCaseRepository, ListView listView) {
-        notes = useCaseRepository.generateNoteList(15);
+    private void setUpListView( ListView listView) {
+//        notes = useCaseRepository.generateNoteList(15);
 
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
         listView.setAdapter(arrayAdapter);
