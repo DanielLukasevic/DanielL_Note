@@ -44,29 +44,21 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.listView);
          fab = findViewById(R.id.fab);
 
-       UseCaseRepository useCaseRepository = new UseCaseRepository();
+         UseCaseRepository useCaseRepository = new UseCaseRepository(getApplicationContext());
+            notes = useCaseRepository.getAll();
+
+       //UseCaseRepository useCaseRepository = new UseCaseRepository();
+
+
+//        NoteDao noteDao = database.noteDao();
+//
+//        notes = noteDao.getAll();
+//        Log.i(APP_TEST,"onCreate: " + noteDao.getAll());
+//        Log.i(APP_TEST, "onCreate: " + noteDao.getItem(5));
 
 
 
-         MainDatabase database =
-                Room.databaseBuilder(
-                        getApplicationContext(),
-                        MainDatabase.class,
-                        DATABASE_NAME
-                )
-                        .allowMainThreadQueries()
-                        .fallbackToDestructiveMigration()
-                        .build();
-
-        NoteDao noteDao = database.noteDao();
-
-        notes = noteDao.getAll();
-        Log.i(APP_TEST,"onCreate: " + noteDao.getAll());
-        Log.i(APP_TEST, "onCreate: " + noteDao.getItem(5));
-
-
-
-        setUpListView( listView);
+        setUpListView(listView);
 
         onClickItem(listView);
 
